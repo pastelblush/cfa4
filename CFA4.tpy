@@ -4,7 +4,7 @@
 	<ProjectInfo>
 		<Path>C:\Users\MY1MRI0\Desktop\CFA4\CFA4.pro</Path>
 		<IsLibrary>false</IsLibrary>
-		<ChangeDate>2017-06-14T12:20:22</ChangeDate>
+		<ChangeDate>2017-06-14T15:19:27</ChangeDate>
 		<Library>
 			<Name>STANDARD.LIB</Name>
 			<Path>C:\TwinCAT\PLC\LIB\STANDARD.LIB</Path>
@@ -62,8 +62,8 @@
 	</DirectoryInfos>
 	<DataTypes>
 		<DataType>
-			<Name Decoration="100E35EF" Crc32="2656734867" LastChange="2017-06-14T11:33:10">ST_Station</Name>
-			<BitSize>120</BitSize>
+			<Name Decoration="10134E87" Crc32="1384489542" LastChange="2017-06-14T15:13:27">ST_Station</Name>
+			<BitSize>192</BitSize>
 			<SubItem>
 				<Name>Autorun_Cond</Name>
 				<Type>BOOL</Type>
@@ -119,34 +119,64 @@
 				<BitOffs>64</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>inPosition</Name>
+				<Name>OriginRun</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>72</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>Bypass</Name>
+				<Name>inPosition</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>80</BitOffs>
 			</SubItem>
 			<SubItem>
+				<Name>Bypass</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>88</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>curr_state</Name>
+				<Type>INT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>96</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>next_state</Name>
+				<Type>INT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>112</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>curr_state_origin</Name>
+				<Type>INT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>128</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>next_state_origin</Name>
+				<Type>INT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>144</BitOffs>
+			</SubItem>
+			<SubItem>
 				<Name>Car</Name>
 				<Type>INT</Type>
 				<BitSize>16</BitSize>
-				<BitOffs>88</BitOffs>
+				<BitOffs>160</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name>E_MinorError</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
-				<BitOffs>104</BitOffs>
+				<BitOffs>176</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name>E_MajorError</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
-				<BitOffs>112</BitOffs>
+				<BitOffs>184</BitOffs>
 			</SubItem>
 		</DataType>
 		<DataType>
@@ -211,8 +241,8 @@
 			</SubItem>
 		</DataType>
 		<DataType>
-			<Name Decoration="10030A97" Crc32="4067287956" LastChange="2017-06-14T11:00:36">ST_MC</Name>
-			<BitSize>24</BitSize>
+			<Name Decoration="1005118B" Crc32="2630635952" LastChange="2017-06-14T15:14:41">ST_MC</Name>
+			<BitSize>40</BitSize>
 			<SubItem>
 				<Name>Autorun</Name>
 				<Type>BOOL</Type>
@@ -230,6 +260,18 @@
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>16</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>OriginRun</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>24</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Origin</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>32</BitOffs>
 			</SubItem>
 		</DataType>
 		<DataType>
@@ -1008,7 +1050,7 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="1007929F" Crc32="0918537453" LastChange="2017-06-14T11:47:32">ST10_Main</Name>
+			<Name Decoration="1007AB3C" Crc32="0918537453" LastChange="2017-06-14T11:47:32">ST10_Main</Name>
 			<PrgInfo>
 				<CodeIndex>57</CodeIndex>
 				<ActionInfo>
@@ -1047,7 +1089,7 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="1007929B" Crc32="3942484194" LastChange="2017-06-14T12:20:22">ST20_Main</Name>
+			<Name Decoration="100BD375" Crc32="1389352277" LastChange="2017-06-14T15:19:27">ST20_Main</Name>
 			<PrgInfo>
 				<CodeIndex>50</CodeIndex>
 				<ActionInfo>
@@ -1075,13 +1117,25 @@
 					<Name>ST20_Main.F20_CurtainClear_Trig</Name>
 				</Symbol>
 				<Symbol>
-					<Name>ST20_Main.curr_state</Name>
-				</Symbol>
-				<Symbol>
-					<Name>ST20_Main.next_state</Name>
-				</Symbol>
-				<Symbol>
 					<Name>ST20_Main.X</Name>
+				</Symbol>
+				<Symbol>
+					<Name>ST20_Main.A20_HeightCheckCyl_WorkPos</Name>
+				</Symbol>
+				<Symbol>
+					<Name>ST20_Main.A20_HeightCheckCyl_HomePos</Name>
+				</Symbol>
+				<Symbol>
+					<Name>ST20_Main.S20_HeightCheckCyl_AtWorkPos</Name>
+				</Symbol>
+				<Symbol>
+					<Name>ST20_Main.S20_HeightCheckCyl_AtHomePos</Name>
+				</Symbol>
+				<Symbol>
+					<Name>ST20_Main.I10_HeightCheck_Good</Name>
+				</Symbol>
+				<Symbol>
+					<Name>ST20_Main.T20_OriginRun</Name>
 				</Symbol>
 			</PrgInfo>
 		</Program>
@@ -1089,23 +1143,23 @@
 	<Symbols>
 		<Symbol>
 			<Name TaskPrio="1">ST10_Main.ST10</Name>
-			<Type Decoration="100E35EF">ST_Station</Type>
+			<Type Decoration="10134E87">ST_Station</Type>
 			<IGroup>16448</IGroup>
 			<IOffset>0</IOffset>
-			<BitSize>120</BitSize>
+			<BitSize>192</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">ST10_Main.S10_CurtainClear</Name>
 			<Type>BOOL</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>15</IOffset>
+			<IOffset>24</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">ST10_Main.F10_ClearDone_Trig</Name>
 			<Type Decoration="1003051C">R_TRIG</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>16</IOffset>
+			<IOffset>25</IOffset>
 			<BitSize>24</BitSize>
 		</Symbol>
 		<Symbol>
@@ -1115,49 +1169,49 @@
 				<![CDATA[Local Status]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>19</IOffset>
+			<IOffset>28</IOffset>
 			<BitSize>24</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">ST10_Main.curr_state</Name>
 			<Type>INT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>22</IOffset>
+			<IOffset>31</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">ST10_Main.next_state</Name>
 			<Type>INT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>24</IOffset>
+			<IOffset>33</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">ST10_Main.X</Name>
 			<Type>INT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>26</IOffset>
+			<IOffset>35</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">ST20_Main.ST20</Name>
-			<Type Decoration="100E35EF">ST_Station</Type>
+			<Type Decoration="10134E87">ST_Station</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>8810</IOffset>
-			<BitSize>120</BitSize>
+			<IOffset>37</IOffset>
+			<BitSize>192</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">ST20_Main.S20_CurtainClear</Name>
 			<Type>BOOL</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>8825</IOffset>
+			<IOffset>61</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">ST20_Main.F20_ClearDone_Trig</Name>
 			<Type Decoration="1003051C">R_TRIG</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>8826</IOffset>
+			<IOffset>62</IOffset>
 			<BitSize>24</BitSize>
 		</Symbol>
 		<Symbol>
@@ -1167,39 +1221,67 @@
 				<![CDATA[Local Status]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>8829</IOffset>
+			<IOffset>65</IOffset>
 			<BitSize>24</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">ST20_Main.curr_state</Name>
-			<Type>INT</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>8832</IOffset>
-			<BitSize>16</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">ST20_Main.next_state</Name>
-			<Type>INT</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>8834</IOffset>
-			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">ST20_Main.X</Name>
 			<Type>INT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>8836</IOffset>
+			<IOffset>68</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
+			<Name TaskPrio="1">ST20_Main.A20_HeightCheckCyl_WorkPos</Name>
+			<Type>BOOL</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>70</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">ST20_Main.A20_HeightCheckCyl_HomePos</Name>
+			<Type>BOOL</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>71</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">ST20_Main.S20_HeightCheckCyl_AtWorkPos</Name>
+			<Type>BOOL</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>72</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">ST20_Main.S20_HeightCheckCyl_AtHomePos</Name>
+			<Type>BOOL</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>73</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">ST20_Main.I10_HeightCheck_Good</Name>
+			<Type>BOOL</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>74</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">ST20_Main.T20_OriginRun</Name>
+			<Type>BOOL</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>75</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
 			<Name TaskPrio="1">.MC</Name>
-			<Type Decoration="10030A97">ST_MC</Type>
+			<Type Decoration="1005118B">ST_MC</Type>
 			<Comment>
 				<![CDATA[ST10 I/O]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>66</IOffset>
-			<BitSize>24</BitSize>
+			<IOffset>114</IOffset>
+			<BitSize>40</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Static="Input" TaskPrio="1">.I10_Housing_Present</Name>
@@ -1232,21 +1314,28 @@
 				<![CDATA[XTS Variable]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>72</IOffset>
+			<IOffset>122</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">.CarStation</Name>
 			<Type Decoration="20017C8B">ARRAY [0..20] OF ST_Car</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>73</IOffset>
+			<IOffset>123</IOffset>
 			<BitSize>69888</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">.T10_Bypass</Name>
 			<Type>BOOL</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>8809</IOffset>
+			<IOffset>8859</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">.T20_Bypass</Name>
+			<Type>BOOL</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>8860</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 	</Symbols>
